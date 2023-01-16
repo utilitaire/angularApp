@@ -1,0 +1,131 @@
+<div class="col-md-12">
+    <div class="card card-plain">
+      <div class="card-header">
+        <h4 class="card-title"> Voitures</h4>
+        <p class="card-category"> liste de mes voitures</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th> Name </th>
+              <th> Country </th>
+              <th> City </th>
+              <th> Name </th>
+              <th> Country </th>
+              <th> City </th>
+              <th> Name </th>
+              <th> Country </th>
+              <th> City </th>
+              <th class="text-right"> Salary </th>
+            </thead>
+            <tbody>
+              <tr>
+                <td> Dakota Rice </td>
+                <td> Niger </td>
+                <td> Oud-Turnhout </td>
+                <td> $36,738 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="col-md-12 card card-plain">
+  <div class="task-manager-container">
+
+    <div class="carlist has-background-white">
+      <h1 class="title has-text-primary">
+        Mes voitures
+      </h1>
+
+      <div class="list-menu">
+        <!-- <a class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]" routerLinkActive="is-active"> -->
+          <!-- <p>{{ list.title }}</p> -->
+        <a class="list-menu-item" [routerLink]="['/lists', 1]" routerLinkActive="is-active">
+          <p>Car name Here</p>
+        </a>
+        <a class="list-menu-item" [routerLink]="['/lists', 1]" routerLinkActive="is-active">
+          <p>Car name Here</p>
+        </a>
+        <a class="list-menu-item" [routerLink]="['/lists', 1]" routerLinkActive="is-active">
+          <p>Car name Here</p>
+        </a>
+        <a class="list-menu-item" [routerLink]="['/lists', 1]" routerLinkActive="is-active">
+          <p>Car name Here</p>
+        </a>
+
+      </div>
+
+      <button class="button is-primary has-text-white" routerLink="/new-list">+ Add Car </button>
+
+    </div>
+
+    <div class="task-list-container has-background-light">
+      <!-- <div *ngIf="tasks">
+        <div class="top-bar">
+          <h1 class="title has-text-primary">
+            Tasks
+          </h1>
+          <div class="dropdown is-hoverable is-right">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span class="icon is-small">
+                  <i class="fas fa-cog" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <a [routerLink]="['/edit-list', selectedListId]" class="dropdown-item">
+                  Edit
+                </a>
+                <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
+                  Delete
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
+          <div class="task-text">
+            <p>{{ task.title }}</p>
+          </div>
+          <div class="task-buttons">
+
+            <button class="button" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
+              <div class="icon">
+                <i class="fas fa-edit"></i>
+              </div>
+            </button>
+
+            <button class="button is-danger" (click)="onDeleteTaskClick(task._id)" style="margin-left: 10px;">
+              <div class="icon">
+                <i class="fas fa-trash"></i>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        <h3 class="empty-state-text" *ngIf="tasks.length === 0">There are no tasks here! Click the add button to create
+          a new task.</h3>
+
+        <button routerLink="./new-task" class="circle-add-button button is-primary">
+          <img src="../../../assets/plus-icon.svg" class="has-text-white">
+        </button>
+      </div> -->
+
+      <!-- <div *ngIf="!tasks"> -->
+      <div>
+        <h3 class="empty-state-text">Please select one of your cars</h3>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
