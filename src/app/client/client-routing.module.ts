@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { CarListComponent } from './components/car-list/car-list.component';
-import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -18,7 +17,6 @@ const routes: Routes = [
       // },
     ],
   },
-  { path: 'client/login',      component: LoginComponent }
 ];
 
 @NgModule({

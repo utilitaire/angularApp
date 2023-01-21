@@ -8,14 +8,12 @@ import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { NavbarModule } from 'app/shared/navbar/navbar.module';
 import { FixedPluginModule } from 'app/shared/fixedplugin/fixedplugin.module';
 import { FooterModule } from 'app/shared/footer/footer.module';
-import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
   declarations: [
     CarListComponent,
-    ClientLayoutComponent,
-    LoginComponent
+    ClientLayoutComponent
   ],
   imports: [
     CommonModule,
