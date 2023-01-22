@@ -15,6 +15,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthService } from "./services/auth.service";
 import { User } from "./models/user.model";
 import { firstValueFrom } from "rxjs";
+import { WebReqInterceptor } from "./services/web-req.interceptor";
 
 function appInitializer(authService: AuthService) {
   // return () => {
@@ -52,7 +53,7 @@ function appInitializer(authService: AuthService) {
       multi: true,
       deps: [AuthService],
     },
-    // { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,9 @@ const routes: Routes = [
     component: ClientLayoutComponent,
     children: [
       {path:'carlist',component:CarListComponent},
+      {path:'carlist/:carId', component: CarListComponent },
       {path:'',component:CarListComponent},
+      // {path:'', redirectTo: '/carlist', pathMatch: 'full' },
       // {
       //   path: '**',
       //   redirectTo: 'error/404',
