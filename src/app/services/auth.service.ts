@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { WebRequestService } from './web-request.service';
 import { Router } from '@angular/router';
-import { shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
+import { User } from 'app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,22 @@ export class AuthService {
     type: "",
     __v: 7
   };
-  
+  private unsubscribe: Subscription[] = []; 
   currentUserSubject: BehaviorSubject<any>;
 
-  get currentUserValue(): any {
+  get currentUserValue(): User {
+    // return this.currentUserSubject.asObservable();
     return this.currentUserSubject.value;
   }
 
-  constructor(private webService: WebRequestService, private router: Router, private http: HttpClient) { 
+  constructor(
+    private webService: WebRequestService, 
+    private router: Router, 
+    private http: HttpClient
+  ) { 
     this.currentUserSubject = new BehaviorSubject<any>(undefined); 
+    const subscr = this.getUserinfo().subscribe();
+    this.unsubscribe.push(subscr);
   }
 
   login(email: string, password: string) {
@@ -34,31 +42,71 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'),res.body);
         console.log("LOGGED IN!");
-        this.currentUser = res.body.value;
-        console.log(this.currentUser)
-        this.currentUserSubject = new BehaviorSubject<any>(this.currentUser);
+        this.currentUser = res.body;
+        this.currentUserSubject = new BehaviorSubject<User>(this.currentUser);
+        console.log(this.currentUserSubject)
       })
     )
   }
 
+  getUserinfo(): Observable<User> {
+    const auth = this.getAccessToken();
+    if (!auth) {
+      return of(undefined);
+    }
+    return this.http.get(`${this.webService.ROOT_URL}/userInfo`, {
+            headers: {
+              'x-refresh-token': this.getRefreshToken(),
+              '_id': this.getUserId(),
+              'x-access-token' : this.getAccessToken()
+            },
+            observe: 'response'
+          }).pipe(
+      map((user: any) => {
+        if (user) {
+          this.currentUserSubject = new BehaviorSubject<User>(user.body);
+        } else {
+          this.logout();
+        }
+        return user.body;
+      }),
+    );
+  }
+
+  // getUserinfo() : Observable<User> {
+  //   user : User;
+  //     this.http.get(`${this.webService.ROOT_URL}/userInfo`, {
+  //       headers: {
+  //         'x-refresh-token': this.getRefreshToken(),
+  //         '_id': this.getUserId(),
+  //         'x-access-token' : this.getAccessToken()
+  //       },
+  //       observe: 'response'
+  //     }).subscribe((myuserinfo: any) => {
+  //     const userinfo = myuserinfo.body;
+  //     // console.log(myuserinfo.body)
+  //     this.currentUserSubject = new BehaviorSubject<User>(userinfo);
+  //     return userinfo
+  //   })
+  //   console.log(this.currentUserSubject.value)
+  //   return this.currentUserSubject;
+  // }
 
   signup(email: string, password: string) {
     return this.webService.signup(email, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'),res.body.value);
         console.log("Successfully signed up and now logged in!");
       })
     )
   }
-
-
-
   
   logout() {
+    console.log("log out ")
     this.removeSession();
     this.router.navigate(['/client/login']);
   }
@@ -79,14 +127,16 @@ export class AuthService {
     localStorage.setItem('x-access-token', accessToken)
   }
   
-  private setSession(userId: string, accessToken: string, refreshToken: string) {
+  private setSession(userId: string, accessToken: string, refreshToken: string,userinfo: string) {
     localStorage.setItem('user-id', userId);
+    localStorage.setItem('user-info', userinfo);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
 
   private removeSession() {
     localStorage.removeItem('user-id');
+    localStorage.removeItem('user-info');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
   }

@@ -21,7 +21,7 @@ export const AppRoutes: Routes = [
   // },
   {
     path: 'client',
-    // canActivate: [ClientAuthGuard],
+    canActivate: [ClientAuthGuard],
     loadChildren: () => import('./client/client.module').then((m) => m.ClientModule),
   },
   {

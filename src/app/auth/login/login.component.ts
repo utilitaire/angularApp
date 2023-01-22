@@ -11,6 +11,8 @@ import { AuthService } from 'app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor( private authService: AuthService, private router: Router ) { 
+    // this.authService.getUserinfo();
+    // console.log(this.authService.currentUserValue)
     if (this.authService.currentUserValue) {
           this.router.navigate(['/client/carlist']);
         }
@@ -23,15 +25,16 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginButtonClicked(email: string, password: string) {
-    // console.log(email +" "+ password)
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
         this.router.navigate(['/client/carlist']);
       }
-      console.log(res);
-      
     });
+  }
+  onUserInfoClick() { 
+    // this.authService.getUserinfo();
+    console.log(this.authService.currentUserValue)
   }
   // constructor(
   //   private fb: FormBuilder,
