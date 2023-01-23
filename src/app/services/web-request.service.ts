@@ -37,14 +37,22 @@ export class WebRequestService {
       });
   }
 
-  signup(email: string, password: string) {
-    return this.http.post(`${this.ROOT_URL}/users`, {
+  signupClient(email: string, nom: string, prenom: string, password: string) {
+    return this.http.post(`${this.ROOT_URL}/clients/sign`, {
       email,
+      nom,
+      prenom,
       password
     }, {
         observe: 'response'
       });
   }
 
+//   {
+//     "email": "Newonil@mail.com",
+//     "nom": "Mamirazana",
+//     "prenom": "Isis O'nil",
+//     "password":"123456789"
+// }
 
 }

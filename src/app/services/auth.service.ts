@@ -75,32 +75,16 @@ export class AuthService {
     );
   }
 
-  // getUserinfo() : Observable<User> {
-  //   user : User;
-  //     this.http.get(`${this.webService.ROOT_URL}/userInfo`, {
-  //       headers: {
-  //         'x-refresh-token': this.getRefreshToken(),
-  //         '_id': this.getUserId(),
-  //         'x-access-token' : this.getAccessToken()
-  //       },
-  //       observe: 'response'
-  //     }).subscribe((myuserinfo: any) => {
-  //     const userinfo = myuserinfo.body;
-  //     // console.log(myuserinfo.body)
-  //     this.currentUserSubject = new BehaviorSubject<User>(userinfo);
-  //     return userinfo
-  //   })
-  //   console.log(this.currentUserSubject.value)
-  //   return this.currentUserSubject;
-  // }
-
-  signup(email: string, password: string) {
-    return this.webService.signup(email, password).pipe(
+  signupClient(email: string, nom: string, prenom: string, password: string) {
+    return this.webService.signupClient(email, nom, prenom, password).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'),res.body.value);
         console.log("Successfully signed up and now logged in!");
+        this.currentUser = res.body;
+        this.currentUserSubject = new BehaviorSubject<User>(this.currentUser);
+        console.log(this.currentUserSubject)
       })
     )
   }

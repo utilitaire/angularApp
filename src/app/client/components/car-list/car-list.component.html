@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!-- <div class="col-md-12">
     <div class="card card-plain">
       <div class="card-header">
         <h4 class="card-title"> Voitures</h4>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-</div>
+</div> -->
 
 <div class="col-md-12 card card-plain">
   <div class="task-manager-container">
@@ -81,8 +81,25 @@
 
         <div class="task" *ngFor="let reparation of reparations" (click)="onreparationClick(reparation)" [ngClass]="{ 'completed': reparation.completed }">
           <div class="task-text">
-            <p>{{ reparation.titre }}</p>
+            <p style="width: 290px;">{{ reparation.titre }}</p>
+            <progress class="progress is-small" value="{{reparation.avancement}}" max="100" style="margin-left: 50px;width: 250px;"> {{reparation.avancement}}%</progress>
+            <p style="width: 170px; margin-left: 50px;">{{ reparation.prix }} Ar</p>
+            <!-- <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{ reparation.titre }} </td>
+                    <td> <progress class="progress is-small" value="{{reparation.avancement}}" max="100"> {{reparation.avancement}}%</progress> </td>
+                    <td> {{ reparation.prix }} Ar </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> -->
+
           </div>
+          <!-- <progress class="progress is-small" value="{{reparation.avancement}}" max="100" style="margin-top: 1.5rem;"> {{reparation.avancement}}%</progress> -->
           <div class="task-buttons">
 
             <button class="button" [routerLink]="['/lists', selectedvoitureId, 'edit-reparation', reparation._id]">

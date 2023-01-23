@@ -32,21 +32,21 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  onRegisterButtonClicked(email: string, nom: string, prenom: string, password: string, Validpassword: string) {
+    // signupClient(email: string, nom: string, prenom: string, password: string)
+    this.authService.signupClient(email, nom, prenom, password).subscribe((res: HttpResponse<any>) => {
+      if (res.status === 200) {
+        // we have logged in successfully
+        this.router.navigate(['/client/carlist']);
+      }
+    });
+  }
+
   onUserInfoClick() { 
     // this.authService.getUserinfo();
     console.log(this.authService.currentUserValue)
   }
-  // constructor(
-  //   private fb: FormBuilder,
-  //   private authService: AuthService,
-  //   private route: ActivatedRoute,
-  //   private router: Router
-  // ) {
-  //   this.isLoading$ = this.authService.isLoading$;
-  //   // redirect to home if already logged in
-  //   if (this.authService.currentUserValue) {
-  //     this.router.navigate(['/formateur/']);
-  //   }
-  // }
+
 
 }
