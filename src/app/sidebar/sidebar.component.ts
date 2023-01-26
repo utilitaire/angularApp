@@ -18,6 +18,11 @@ export const ROUTES: RouteInfo[] = [
     { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
 ];
 
+export const RoutesAtelier: RouteInfo[] = [
+    { path: '/atelier/garage',          title: 'Garage',      icon:'nc-single-02',  class: '' },
+    { path: '/atelier/bonsortie',          title: 'Bon de Sortie',      icon:'nc-single-02',  class: '' },
+];
+
 @Component({
     moduleId: module.id,
     selector: 'sidebar-cmp',
@@ -31,7 +36,13 @@ export class SidebarComponent implements OnInit {
     public menuItems: any[];
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        const currentUser = this.authService.currentUserValue;
+        if(currentUser && currentUser.type === "client") {
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+        }
+        if(currentUser && currentUser.type === "atelier") {
+            this.menuItems = RoutesAtelier.filter(menuItem => menuItem);
+        }
     }
 
     Logout() {

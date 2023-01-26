@@ -1,7 +1,9 @@
 import { ClientLayoutComponent } from './client/client-layout/client-layout.component';
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
 import { ClientAuthGuard } from './client/services/client-auth-guard';
+import { AtelierAuthGuard } from './client/services/atelier-auth-guard';
 
 export const AppRoutes: Routes = [
   {
@@ -23,6 +25,11 @@ export const AppRoutes: Routes = [
     path: 'client',
     canActivate: [ClientAuthGuard],
     loadChildren: () => import('./client/client.module').then((m) => m.ClientModule),
+  },
+  {
+    path: 'atelier',
+    canActivate: [AtelierAuthGuard],
+    loadChildren: () => import('./atelier/atelier.module').then((m) => m.AtelierModule),
   },
   {
     path: '**',

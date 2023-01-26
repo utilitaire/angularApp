@@ -27,8 +27,15 @@ export class LoginComponent implements OnInit {
   onLoginButtonClicked(email: string, password: string) {
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
-        // we have logged in successfully
-        this.router.navigate(['/client/carlist']);
+        console.log(res.body.type)
+        if (res.body.type == 'client') {
+          // we have logged in successfully
+          this.router.navigate(['/client/carlist']);
+        }
+        else if (res.body.type == 'atelier') {
+          // we have logged in successfully
+          this.router.navigate(['/atelier/garage']);
+        }
       }
     });
   }
