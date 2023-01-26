@@ -1,3 +1,4 @@
+import { ReceptionComponent } from './reception/reception.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 import { GarageComponent } from './garage/garage.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       {path:'garage',component:GarageComponent},
       {path:'bonsortie', component: BonSortieComponent },
-      // {path:'',component:CarListComponent},
+      {path:'reception', component: ReceptionComponent },
       // {path:'', redirectTo: '/carlist', pathMatch: 'full' },
       // {
       //   path: '**',

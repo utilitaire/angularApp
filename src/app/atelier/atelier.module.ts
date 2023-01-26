@@ -8,6 +8,7 @@ import { NavbarModule } from 'app/shared/navbar/navbar.module';
 import { SidebarModule } from 'app/sidebar/sidebar.module';
 import { GarageComponent } from './garage/garage.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
+import { ReceptionComponent } from './reception/reception.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 
   
     GarageComponent,
-        BonSortieComponent
+        BonSortieComponent,
+        ReceptionComponent
   ],
   imports: [
     CommonModule,
