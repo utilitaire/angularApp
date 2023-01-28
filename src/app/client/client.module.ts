@@ -10,8 +10,6 @@ import { NavbarModule } from 'app/shared/navbar/navbar.module';
 import { FixedPluginModule } from 'app/shared/fixedplugin/fixedplugin.module';
 import { FooterModule } from 'app/shared/footer/footer.module';
 import { DepotVoitureComponent } from './components/depot-voiture/depot-voiture.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -27,8 +25,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     FooterModule,
     FixedPluginModule,
     DragDropModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule
   ]
 })
 export class ClientModule { }

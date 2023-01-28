@@ -1,3 +1,4 @@
+import { AtelierService } from './../../services/atelier.service';
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
@@ -8,14 +9,21 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ReceptionComponent implements OnInit {
 
-  constructor() { }
+  waitlist: any[];
+  garage: any[];
+
+  constructor(private atelierService: AtelierService) { }
 
   ngOnInit(): void {
+    this.atelierService.getWaitlist().subscribe((voitures: any[]) => {
+      this.waitlist = voitures;
+      console.log(this.waitlist)
+    })
+    this.atelierService.getGaragelist().subscribe((voitures: any[]) => {
+      this.garage = voitures;
+      console.log(this.garage)
+    })
   }
-
-  wait = ['voiture 1', 'voiture 2', 'voiture 3', 'voiture 4'];
-
-  garage = ['voiture 5', 'voiture 6'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -27,6 +35,13 @@ export class ReceptionComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      let dragedCar: any;
+      dragedCar = event.container.data[event.currentIndex];
+      console.log(dragedCar);
+      // console.log(event.container.data[event.currentIndex]);
+      this.atelierService.ToGarage(dragedCar._id).subscribe((reception: any) => {
+
+      })
     }
   }
 
