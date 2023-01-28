@@ -1,3 +1,4 @@
+import { LoaderService } from './../loader/loader.service';
 import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router } from '@angular/router';
@@ -7,7 +8,8 @@ import { AuthService } from 'app/services/auth.service';
 @Component({
     moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['./navbar.component.scss']
 })
 
 export class NavbarComponent implements OnInit{
@@ -20,7 +22,13 @@ export class NavbarComponent implements OnInit{
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button;
 
-    constructor(private authService: AuthService, location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
+    constructor(
+      private authService: AuthService,
+      location:Location, 
+      private renderer : Renderer2,
+      private element : ElementRef, 
+      private router: Router,
+      public loaderService: LoaderService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;

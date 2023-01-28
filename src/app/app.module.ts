@@ -16,6 +16,9 @@ import { AuthService } from "./services/auth.service";
 import { User } from "./models/user.model";
 import { firstValueFrom } from "rxjs";
 import { WebReqInterceptor } from "./services/web-req.interceptor";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InterceptorService } from "./shared/loader/interceptor.service";
 
 function appInitializer(authService: AuthService) {
   // return () => {
@@ -43,7 +46,9 @@ function appInitializer(authService: AuthService) {
     ToastrModule.forRoot(),
     FooterModule,
     FixedPluginModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
@@ -53,7 +58,8 @@ function appInitializer(authService: AuthService) {
       multi: true,
       deps: [AuthService],
     },
-    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: WebReqInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })
