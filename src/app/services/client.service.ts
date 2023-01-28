@@ -10,7 +10,10 @@ export class ClientService {
 
 
   getUserVoitures() { return this.webReqService.get('voitures'); }
+  getVoituresOut() { return this.webReqService.get('voituresout'); }
+  getVoituresIn() { return this.webReqService.get('voituresin'); }
 
+  depotVoiture(carId:any) { return this.webReqService.post('voitures/depot', { carId });}
   createVoiture(nom: string) { return this.webReqService.post('voitures', { nom });}
 
   updateList(id: string, title: string) {

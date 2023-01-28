@@ -1,14 +1,14 @@
 <div class="example-container">
-    <h2>En Attente</h2>
+    <h2>Mes voitures</h2>
   
     <div
       cdkDropList
-      #waitList="cdkDropList"
-      [cdkDropListData]="wait"
+      #carsList="cdkDropList"
+      [cdkDropListData]="voitures"
       [cdkDropListConnectedTo]="[garageList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of wait" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of voitures" cdkDrag>{{item.nom}}</div>
     </div>
   </div>
   
@@ -19,12 +19,11 @@
       cdkDropList
       #garageList="cdkDropList"
       [cdkDropListData]="garage"
-      [cdkDropListConnectedTo]="[waitList]"
+      [cdkDropListConnectedTo]="[garageList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of garage" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of garage" cdkDrag>{{item.nom}}</div>
     </div>
   </div>
-
   
   

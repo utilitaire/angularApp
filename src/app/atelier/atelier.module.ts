@@ -9,6 +9,7 @@ import { SidebarModule } from 'app/sidebar/sidebar.module';
 import { GarageComponent } from './garage/garage.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 import { ReceptionComponent } from './reception/reception.component';
+import { DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { ReceptionComponent } from './reception/reception.component';
     NavbarModule,
     FooterModule,
     FixedPluginModule,
+    DragDropModule
   ]
 })
 export class AtelierModule { }

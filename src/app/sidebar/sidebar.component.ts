@@ -13,9 +13,6 @@ export interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/client/carlist',          title: 'Garage',      icon:'nc-single-02',  class: '' },
     { path: '/client/depot',          title: 'Deposer une voiture',      icon:'nc-single-02',  class: '' },
-    { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
-    { path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' },
-    { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
 ];
 
 export const RoutesAtelier: RouteInfo[] = [
@@ -44,11 +41,6 @@ export class SidebarComponent implements OnInit {
         if(currentUser && currentUser.type === "atelier") {
             this.menuItems = RoutesAtelier.filter(menuItem => menuItem);
         }
-    }
-
-    Logout() {
-        this.authService.logout();
-        this.router.navigate(['/client/login']);
     }
 }
 

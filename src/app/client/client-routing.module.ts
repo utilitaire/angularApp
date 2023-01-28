@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ClientLayoutComponent } from './client-layout/client-layout.component';
 import { CarListComponent } from './components/car-list/car-list.component';
+import { DepotVoitureComponent } from './components/depot-voiture/depot-voiture.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
       {path:'carlist',component:CarListComponent},
       {path:'carlist/:carId', component: CarListComponent },
+      {path:'depot',component:DepotVoitureComponent},
       {path:'',component:CarListComponent},
       // {path:'', redirectTo: '/carlist', pathMatch: 'full' },
       // {
