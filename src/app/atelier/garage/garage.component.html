@@ -3,7 +3,7 @@
   
       <div class="carlist has-background-white">
         <h1 class="title has-text-primary">
-          Mes voitures
+          Voitures
         </h1>
   
         <div class="list-menu">
@@ -29,13 +29,7 @@
               <p style="width: 170px; margin-left: 50px;">{{ reparation.prix }} Ar</p>
             </div>
             <div class="task-buttons">
-  
-              <button class="button" [routerLink]="['/lists', selectedvoitureId, 'edit-reparation', reparation._id]">
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-              </button>
-  
+
               <button class="button is-danger" (click)="onDeletereparationClick(reparation._id)" style="margin-left: 10px;">
                 <div class="icon">
                   <i class="fas fa-trash"></i>

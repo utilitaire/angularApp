@@ -13,7 +13,7 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
 import { AddReparationModalComponent } from './add-reparation-modal/add-reparation-modal.component';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 @NgModule({
   declarations: [
 
@@ -35,6 +35,7 @@ import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng
     ReactiveFormsModule,
     NgbModalModule,
     NgbModule,
+    NgxSliderModule
   ]
 })
 export class AtelierModule { }

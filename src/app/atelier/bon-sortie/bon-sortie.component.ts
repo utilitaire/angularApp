@@ -1,4 +1,7 @@
+import { AtelierService } from './../../services/atelier.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-bon-sortie',
@@ -7,9 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BonSortieComponent implements OnInit {
 
-  constructor() { }
+  voitures: any[];
+  
+  constructor(
+    private atelierService: AtelierService, 
+    ) { }
 
   ngOnInit(): void {
+    this.refreshGarageList();
+  }
+
+  refreshGarageList() {
+    this.atelierService.getGaragelist().subscribe((voitures: any[]) => {
+      this.voitures = voitures;
+    })
+  }
+
+  onValiderSortieClick(id:any) {
+    this.atelierService.ValiderSortie(id).subscribe((reception: any) => {
+      
+    });
+    this.refreshGarageList();
   }
 
 }

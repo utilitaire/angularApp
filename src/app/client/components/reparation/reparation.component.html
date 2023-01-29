@@ -1,0 +1,49 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title h4" id="example-modal-sizes-title-lg">
+        <ng-container *ngIf="reparation">
+          <ng-container >Infos Reparation</ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+
+    <div class="overlay overlay-block cursor-default modal-body" style="min-height: 300px;">
+      <ng-container *ngIf="reparation">
+        <form action="#" class="form form-label-right" [formGroup]="formGroup">
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <label class="form-label large">Titre</label>
+              <p>{{reparation.titre}}</p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <label class="form-label large">Description</label>
+              <p>{{reparation.description}}</p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <label class="form-label large">Prix</label>
+              <p>{{reparation.prix}}</p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <label class="form-label large">Avancement</label>
+              <ngx-slider [(value)]="reparation.avancement" [options]="optionsDesable"></ngx-slider>
+            </div>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+    <button type="button" class="btn btn-primary btn-elevate mr-2" (click)="modal.dismiss()">Voir Facture</button>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Fermer</button>
+      <ng-container *ngIf="reparation">
+        <button type="submit" class="btn btn-primary btn-elevate" (click)="payer()">Payer</button>
+      </ng-container>
+    </div>
+  </div>

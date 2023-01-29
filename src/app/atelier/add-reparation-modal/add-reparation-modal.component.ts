@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmptyError, of, Subscription } from 'rxjs';
 import { catchError, finalize, first, tap } from 'rxjs/operators';
+import { Options } from '@angular-slider/ngx-slider';
+
 const EMPTY_reparation: any = {
   // _id:undefined,
   titre: '',
@@ -13,7 +15,7 @@ const EMPTY_reparation: any = {
   // fin : '',
   prix : 0,
   // _carId: '',
-  // avancement: 0,
+  avancement: 0,
   // completed: false,
   // state: 0,
 };
@@ -30,6 +32,16 @@ export class AddReparationModalComponent implements OnInit {
   reparation: any;
   formGroup: FormGroup;
   private subscriptions: Subscription[] = [];
+  options: Options = {
+    floor: 0,
+    ceil: 100,
+  };
+
+  optionsDesable: Options = {
+    floor: 0,
+    ceil: 100,
+    disabled : true
+  };
   
   constructor(
     public activeModal: NgbActiveModal,
@@ -99,7 +111,6 @@ export class AddReparationModalComponent implements OnInit {
         // debut : [this.reparation.debut],
         // fin : [this.reparation.fin],
         prix : [this.reparation.prix],
-        // avancement: [this.reparation.titre],
         // completed: [this.reparation.titre],
         // state: [this.reparation.titre],
       });
@@ -113,6 +124,5 @@ export class AddReparationModalComponent implements OnInit {
       // this.reparation.fin = formData.fin;
       this.reparation.prix = formData.prix;
       this.reparation._carId = this.idVoiture;
-      // this.reparation.avancement = formData.avancement;
     }
 }

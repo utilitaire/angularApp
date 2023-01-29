@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InterceptorService } from "./shared/loader/interceptor.service";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider'; 
 
 function appInitializer(authService: AuthService) {
   // return () => {
@@ -52,7 +53,8 @@ function appInitializer(authService: AuthService) {
     MatProgressBarModule,
     MatProgressSpinnerModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    MatSliderModule
   ],
   providers: [
     {

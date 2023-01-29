@@ -1,6 +1,8 @@
 import { ClientService } from './../../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReparationComponent } from '../reparation/reparation.component';
 
 @Component({
   selector: 'app-car-list',
@@ -14,7 +16,12 @@ export class CarListComponent implements OnInit {
 
   selectedvoitureId: string;
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private clientService: ClientService, 
+    private route: ActivatedRoute, 
+    private router: Router,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -34,6 +41,11 @@ export class CarListComponent implements OnInit {
     this.clientService.getUserVoitures().subscribe((voitures: any[]) => {
       this.voitures = voitures;
     })
+  }
+
+  onreparationClick(reparation: any) {
+    const modalRef = this.modalService.open(ReparationComponent, { size: 'xl' });
+    modalRef.componentInstance.reparation = reparation;
   }
 
 }

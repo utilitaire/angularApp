@@ -23,25 +23,6 @@
           <h1 class="title has-text-primary">
             Reparations
           </h1>
-          <!-- <div class="dropdown is-hoverable is-right">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                <span class="icon is-small">
-                  <i class="fas fa-cog" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-              <div class="dropdown-content">
-                <a [routerLink]="['/edit-list', selectedvoitureId]" class="dropdown-item">
-                  Edit
-                </a>
-                <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
-                  Delete
-                </a>
-              </div>
-            </div>
-          </div> -->
         </div>
 
         <div class="task" *ngFor="let reparation of reparations" (click)="onreparationClick(reparation)" [ngClass]="{ 'completed': reparation.completed }">
@@ -49,22 +30,7 @@
             <p style="width: 290px;">{{ reparation.titre }}</p>
             <progress class="progress is-small" value="{{reparation.avancement}}" max="100" style="margin-left: 50px;width: 250px;"> {{reparation.avancement}}%</progress>
             <p style="width: 170px; margin-left: 50px;">{{ reparation.prix }} Ar</p>
-            <!-- <div class="table-responsive">
-              <table class="table">
-                <thead class=" text-primary">
-                </thead>
-                <tbody>
-                  <tr>
-                    <td> {{ reparation.titre }} </td>
-                    <td> <progress class="progress is-small" value="{{reparation.avancement}}" max="100"> {{reparation.avancement}}%</progress> </td>
-                    <td> {{ reparation.prix }} Ar </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div> -->
-
           </div>
-          <!-- <progress class="progress is-small" value="{{reparation.avancement}}" max="100" style="margin-top: 1.5rem;"> {{reparation.avancement}}%</progress> -->
           <div class="task-buttons">
 
             <button class="button" [routerLink]="['/lists', selectedvoitureId, 'edit-reparation', reparation._id]">
@@ -72,22 +38,9 @@
                 <i class="fas fa-edit"></i>
               </div>
             </button>
-
-            <button class="button is-danger" (click)="onDeletereparationClick(reparation._id)" style="margin-left: 10px;">
-              <div class="icon">
-                <i class="fas fa-trash"></i>
-              </div>
-            </button>
-
           </div>
         </div>
-
         <h3 class="empty-state-text" *ngIf="reparations.length === 0">Aucune reparationspour cette voiture</h3>
-
-        <button routerLink="./new-reparation" class="circle-add-button button is-primary">
-          <!-- <img src="../../../../../assets/img/plus-icon.svg" class="has-text-white"> -->
-          <img src="../../../../assets/img/plus-icon.svg" class="has-text-white">
-        </button>
       </div>
 
       <div *ngIf="!reparations">

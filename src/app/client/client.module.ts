@@ -10,12 +10,17 @@ import { NavbarModule } from 'app/shared/navbar/navbar.module';
 import { FixedPluginModule } from 'app/shared/fixedplugin/fixedplugin.module';
 import { FooterModule } from 'app/shared/footer/footer.module';
 import { DepotVoitureComponent } from './components/depot-voiture/depot-voiture.component';
+import { ReparationComponent } from './components/reparation/reparation.component';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
     CarListComponent,
     ClientLayoutComponent,
-    DepotVoitureComponent
+    DepotVoitureComponent,
+    ReparationComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +30,11 @@ import { DepotVoitureComponent } from './components/depot-voiture/depot-voiture.
     FooterModule,
     FixedPluginModule,
     DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModalModule,
+    NgbModule,
+    NgxSliderModule
   ]
 })
 export class ClientModule { }

@@ -7,6 +7,8 @@
         </ng-container>
       </div>
     </div>
+
+
     <div class="overlay overlay-block cursor-default modal-body" style="min-height: 300px;">
       <ng-container *ngIf="reparation">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
@@ -30,9 +32,19 @@
               <input type="number" class="form-control form-control-lg form-control-solid" name="prix" formControlName="prix" />
             </div>
           </div>
+          <div class="form-group row">
+            <div class="col-lg-12">
+              <label class="form-label">Avancement</label>
+              <!-- <ngx-slider [(value)]="reparation.avancement" [options]="options"></ngx-slider> -->
+              <ngx-slider *ngIf="reparation.completed == false" [(value)]="reparation.avancement" [options]="options"></ngx-slider>
+              <ngx-slider *ngIf="reparation.completed == true"  [(value)]="reparation.avancement" [options]="optionsDesable"></ngx-slider>
+            </div>
+          </div>
         </form>
       </ng-container>
     </div>
+    <button *ngIf="reparation._id" type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Voir Facture</button>
+
     <div class="modal-footer">
       <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Annuler</button>
       <ng-container *ngIf="reparation">
