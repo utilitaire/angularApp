@@ -11,9 +11,10 @@ const routes: Routes = [
     path: '',
     component: ClientLayoutComponent,
     children: [
-      {path:'garage',component:GarageComponent},
       {path:'bonsortie', component: BonSortieComponent },
       {path:'reception', component: ReceptionComponent },
+      {path:'garage',component:GarageComponent},
+      {path:'garage/:carId', component: GarageComponent },
       // {path:'', redirectTo: '/carlist', pathMatch: 'full' },
       // {
       //   path: '**',

@@ -92,7 +92,6 @@ export class AuthService {
   logout() {
     console.log("log out ")
     this.removeSession();
-    this.router.navigate(['/client/login']);
     window.location.reload();
   }
 

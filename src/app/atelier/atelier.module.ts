@@ -10,7 +10,9 @@ import { GarageComponent } from './garage/garage.component';
 import { BonSortieComponent } from './bon-sortie/bon-sortie.component';
 import { ReceptionComponent } from './reception/reception.component';
 import { DragDropModule} from '@angular/cdk/drag-drop';
-
+import { AddReparationModalComponent } from './add-reparation-modal/add-reparation-modal.component';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { NgbDatepickerModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
   
     GarageComponent,
         BonSortieComponent,
-        ReceptionComponent
+        ReceptionComponent,
+        AddReparationModalComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,11 @@ import { DragDropModule} from '@angular/cdk/drag-drop';
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    DragDropModule
+    DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModalModule,
+    NgbModule,
   ]
 })
 export class AtelierModule { }

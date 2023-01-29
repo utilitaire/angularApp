@@ -19,6 +19,8 @@ import { WebReqInterceptor } from "./services/web-req.interceptor";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InterceptorService } from "./shared/loader/interceptor.service";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 function appInitializer(authService: AuthService) {
   // return () => {
@@ -48,7 +50,9 @@ function appInitializer(authService: AuthService) {
     FixedPluginModule,
     HttpClientModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [
     {
