@@ -16,6 +16,10 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/${uri}`);
   }
 
+  getPDF(uri: string, payload: any) {
+    return this.http.post(`${this.ROOT_URL}/${uri}`, payload, {responseType: 'blob'});
+  }
+
   post(uri: string, payload: any) {
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }

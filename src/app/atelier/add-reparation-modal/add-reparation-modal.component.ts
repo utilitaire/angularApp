@@ -1,11 +1,14 @@
+import { firstValueFrom } from 'rxjs';
 import { AtelierService } from './../../services/atelier.service';
 import { ClientService } from './../../services/client.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EmptyError, of, Subscription } from 'rxjs';
+import { BehaviorSubject, EmptyError, Observable, of, Subscription } from 'rxjs';
 import { catchError, finalize, first, tap } from 'rxjs/operators';
 import { Options } from '@angular-slider/ngx-slider';
+import { HttpEventType } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 
 const EMPTY_reparation: any = {
   // _id:undefined,
@@ -42,17 +45,73 @@ export class AddReparationModalComponent implements OnInit {
     ceil: 100,
     disabled : true
   };
+
+  // downloadedFile:Blob;
+  // downloadedFileSubject: BehaviorSubject<Blob>;
+  // downloadedFile$: Observable<Blob>;
   
+  // fileSrc :any;
+  // fileSrcSubject: BehaviorSubject<String>;
+  // fileSrc$: Observable<String>;
+
   constructor(
     public activeModal: NgbActiveModal,
     private fb: FormBuilder,
     public modal: NgbActiveModal,
     private atelierService:AtelierService,
-    ) {}
+    private sanitizer : DomSanitizer
+    ) {
+      // this.downloadedFileSubject  =new BehaviorSubject<Blob>(this.downloadedFile);
+      // this.downloadedFile$ = this.downloadedFileSubject.asObservable();
+      // this.downloadedFile=null;
+
+      // this.fileSrcSubject  =new BehaviorSubject<String>(this.fileSrc);
+      // this.fileSrc$ = this.fileSrcSubject.asObservable();
+    }
 
     ngOnInit(): void {
       this.loadReparation();
     }
+
+    // public download(fileName:string) {
+    //   this.atelierService.getFacture().subscribe(
+    //     data => {
+    //       switch (data.type) {
+    //         case HttpEventType.Response:
+    //           this.downloadedFile = new Blob([data.body], { type: data.body.type });
+    //           if(this.downloadedFile.type=='application/x-zip-compressed'){
+    //             const a = document.createElement('a');
+    //             a.setAttribute('style', 'display:none;');
+    //             document.body.appendChild(a);
+    //             a.download = "Facture.pdf";
+    //             a.href = URL.createObjectURL(this.downloadedFile);
+    //             a.target = '_blank';
+    //             a.click();
+    //             document.body.removeChild(a);
+    //           }
+    //           if(this.downloadedFile.type=='application/pdf'){
+    //             this.fileSrc = URL.createObjectURL(this.downloadedFile);
+    //             this.fileSrcSubject.next(this.fileSrc);
+    //             this.fileSrc$ = this.fileSrcSubject.asObservable();
+    //             this.downloadedFileSubject.next(this.downloadedFile);
+    //             this.downloadedFile$ = this.downloadedFileSubject.asObservable();
+    //           }
+    //           else {
+    //             this.fileSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.downloadedFile));
+    //             this.fileSrcSubject.next(this.fileSrc);
+    //             this.fileSrc$ = this.fileSrcSubject.asObservable();
+    //             this.downloadedFileSubject.next(this.downloadedFile);
+    //             this.downloadedFile$ = this.downloadedFileSubject.asObservable();
+    //           }          
+    //           break;
+    //       }
+    //     },
+    //     error => {
+    //       // this.downloadStatus.emit( {status: ProgressStatusEnum.ERROR});
+    //     }
+    //   );
+    //   console.log('tafa = '+fileName);
+    // }
 
     save() {
       this.preparereparation();
@@ -124,5 +183,30 @@ export class AddReparationModalComponent implements OnInit {
       // this.reparation.fin = formData.fin;
       this.reparation.prix = formData.prix;
       this.reparation._carId = this.idVoiture;
+    }
+
+    getFacture(idReparation : any) {
+      let factureData;
+      this.atelierService.getFactureData(idReparation).subscribe((data: any) => {
+        factureData = data;
+        console.log(data);
+        this.atelierService.getFacture(factureData).subscribe((data: any) => {
+            const blob = new Blob([data], {type: 'application/pdf'});
+            var downloadURL = window.URL.createObjectURL(data);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = "Fact.ure.pdf";
+            link.click();
+          })
+      })
+      
+      // this.atelierService.getFacture(idReparation).subscribe((data: any) => {
+      //   const blob = new Blob([data], {type: 'application/pdf'});
+      //   var downloadURL = window.URL.createObjectURL(data);
+      //   var link = document.createElement('a');
+      //   link.href = downloadURL;
+      //   link.download = "Fact.ure.pdf";
+      //   link.click();
+      // })
     }
 }
