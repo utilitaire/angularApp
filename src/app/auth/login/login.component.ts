@@ -28,14 +28,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         console.log(res.body.type)
-        if (res.body.type == 'client') {
-          // we have logged in successfully
-          this.router.navigate(['/client/carlist']);
-        }
-        else if (res.body.type == 'atelier') {
-          // we have logged in successfully
-          this.router.navigate(['/atelier/garage']);
-        }
+        if (res.body.type == 'client') { this.router.navigate(['/client/carlist']); }
+        else if (res.body.type == 'atelier') { this.router.navigate(['/atelier/garage']); }
+        else if (res.body.type == 'finance') { this.router.navigate(['/finance/paiement']); }
       }
     });
   }

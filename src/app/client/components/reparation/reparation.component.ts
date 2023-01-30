@@ -5,6 +5,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmptyError, of, Subscription } from 'rxjs';
 import { catchError, finalize, first, tap } from 'rxjs/operators';
 import { Options } from '@angular-slider/ngx-slider';
+import { AtelierService } from 'app/services/atelier.service';
 
 @Component({
   selector: 'app-reparation',
@@ -32,11 +33,28 @@ export class ReparationComponent implements OnInit {
     private fb: FormBuilder,
     public modal: NgbActiveModal,
     private clientService:ClientService,
+    private atelierService:AtelierService
     ) {}
 
     ngOnInit(): void { }
 
     payer() {
       
+    }
+
+    getFacture(idReparation : any) {
+      let factureData;
+      this.atelierService.getFactureData(idReparation).subscribe((data: any) => {
+        factureData = data;
+        console.log(data);
+        this.atelierService.getFacture(factureData).subscribe((data: any) => {
+            const blob = new Blob([data], {type: 'application/pdf'});
+            var downloadURL = window.URL.createObjectURL(data);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = "Facture.pdf";
+            link.click();
+          })
+      })
     }
 }

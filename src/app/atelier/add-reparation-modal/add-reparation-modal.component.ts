@@ -195,18 +195,9 @@ export class AddReparationModalComponent implements OnInit {
             var downloadURL = window.URL.createObjectURL(data);
             var link = document.createElement('a');
             link.href = downloadURL;
-            link.download = "Fact.ure.pdf";
+            link.download = "Facture.pdf";
             link.click();
           })
       })
-      
-      // this.atelierService.getFacture(idReparation).subscribe((data: any) => {
-      //   const blob = new Blob([data], {type: 'application/pdf'});
-      //   var downloadURL = window.URL.createObjectURL(data);
-      //   var link = document.createElement('a');
-      //   link.href = downloadURL;
-      //   link.download = "Fact.ure.pdf";
-      //   link.click();
-      // })
     }
 }

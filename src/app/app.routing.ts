@@ -4,6 +4,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 
 import { ClientAuthGuard } from './client/services/client-auth-guard';
 import { AtelierAuthGuard } from './client/services/atelier-auth-guard';
+import { FinanceAuthGuard } from './client/services/finance-auth-guard';
 
 export const AppRoutes: Routes = [
   {
@@ -25,6 +26,11 @@ export const AppRoutes: Routes = [
     path: 'client',
     canActivate: [ClientAuthGuard],
     loadChildren: () => import('./client/client.module').then((m) => m.ClientModule),
+  },
+  {
+    path: 'finance',
+    canActivate: [FinanceAuthGuard],
+    loadChildren: () => import('./finance/finance.module').then((m) => m.FinanceModule),
   },
   {
     path: 'atelier',

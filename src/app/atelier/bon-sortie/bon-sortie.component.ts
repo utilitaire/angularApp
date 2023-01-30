@@ -28,9 +28,9 @@ export class BonSortieComponent implements OnInit {
 
   onValiderSortieClick(id:any) {
     this.atelierService.ValiderSortie(id).subscribe((reception: any) => {
-      
+      this.refreshGarageList();
     });
-    this.refreshGarageList();
+    
   }
 
 }

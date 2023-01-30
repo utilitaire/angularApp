@@ -21,6 +21,11 @@ export const RoutesAtelier: RouteInfo[] = [
     { path: '/atelier/bonsortie',          title: 'Bon de Sortie',      icon:'nc-single-02',  class: '' },
 ];
 
+export const RoutesFinance: RouteInfo[] = [
+    { path: '/finance/paiement',          title: 'Valider Paiements',      icon:'nc-single-02',  class: '' },
+    { path: '/finance/paiement',          title: 'Statistiques',      icon:'nc-single-02',  class: '' },
+];
+
 @Component({
     moduleId: module.id,
     selector: 'sidebar-cmp',
@@ -40,6 +45,9 @@ export class SidebarComponent implements OnInit {
         }
         if(currentUser && currentUser.type === "atelier") {
             this.menuItems = RoutesAtelier.filter(menuItem => menuItem);
+        }
+        if(currentUser && currentUser.type === "finance") {
+            this.menuItems = RoutesFinance.filter(menuItem => menuItem);
         }
     }
 }

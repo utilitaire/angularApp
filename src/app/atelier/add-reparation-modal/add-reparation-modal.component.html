@@ -43,6 +43,7 @@
       </ng-container>
     </div>
     <button *ngIf="reparation._id" type="button" class="btn btn-light btn-elevate mr-2" (click)="getFacture(reparation._id)">Voir Facture</button>
+    <button *ngIf="reparation._id" type="button" class="btn btn-light btn-elevate mr-2" (click)="getFacture(reparation._id)">Envoyer Facture au client</button>
     <div class="modal-footer">
       <button type="button" class="btn btn-light btn-elevate mr-2" (click)="modal.dismiss()">Annuler</button>
       <ng-container *ngIf="reparation">

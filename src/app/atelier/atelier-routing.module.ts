@@ -15,11 +15,6 @@ const routes: Routes = [
       {path:'reception', component: ReceptionComponent },
       {path:'garage',component:GarageComponent},
       {path:'garage/:carId', component: GarageComponent },
-      // {path:'', redirectTo: '/carlist', pathMatch: 'full' },
-      // {
-      //   path: '**',
-      //   redirectTo: 'error/404',
-      // },
     ],
   },
 ];
